@@ -140,7 +140,7 @@ print(f'''
 
 ainput = int(input('''
 //////////////////////////////////////////////////////////////////////////////////////
-Mady by Geek#0001, Modified by static#4444, and sum from vipqix altough almost nothing
+Mady by Geek#2526, Modified by static#4444, and sum from Vipqix#0001 altough almost nothing
 
 1. auto mines                             | 2. auto towers
 //////////////////////////////////////////////////////////////////////////////////////
