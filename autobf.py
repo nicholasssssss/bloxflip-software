@@ -1,4 +1,4 @@
-import os, colorama, random, bloxflip, time, rainbowtext
+import os, colorama, random, bloxflip, time, rainbowtext, requests, cloudscraper
 
 Currency = bloxflip.Currency
 token = open('authtoken.txt', 'r').read()
@@ -125,7 +125,17 @@ class autoplay:
         {r}you lost! |{w} balance: {balance}
         🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥
                 """)
-                            
+
+    def crashmonitor():
+        s = cloudscraper.create_scraper()
+        info = s.get('https://api.bloxflip.com/games/crash').json()['crashpoint']
+        print(f'''
+        {y}crashpoint: {g}{info}{w}
+        ''')
+
+            
+
+
 os.system('cls')
 print(f'''
 {r                            }░█████╗░██╗░░░██╗████████╗░█████╗░  ██████╗░██╗░░░░░░█████╗░██╗░░░██╗███████╗██████╗░
@@ -140,14 +150,12 @@ print(f'''
 ainput = int(input(f'''
 //////////////////////////////////////////////////////////////////////////////////////
 Mady by Geek#0001, Modified by static#4444, and sum from vipqix altough almost nothing, phish#7381 too
-
-1. auto mines                             | 2. auto towers
-3. mines cachout                          | 4. towers cachout
-5. balance ckecker                        | 6. about tool
-7. balance monitor                        | 8. token checker
-9. crash monitor                          | 10. rain monitor
-11. token changer                         | 12. exit
-
+1.  auto mines                             | 2.  auto towers
+3.  mines cachout                          | 4.  towers cachout
+5.  balance ckecker                        | 6.  about tool
+7.  balance monitor                        | 8.  token checker
+9.  crash predictor                        | 10. rain monitor
+11. token changer                          | 12. exit
 //////////////////////////////////////////////////////////////////////////////////////
 ----->
 INPUT: {g}'''))
@@ -179,21 +187,17 @@ elif ainput == 5:
 
 elif ainput == 6:
     print(f'''
-
-
 {rainbowtext.text('░█████╗░██████╗░░█████╗░██╗░░░██╗████████╗  ████████╗██╗░░██╗██╗░██████╗')}
 {rainbowtext.text('██╔══██╗██╔══██╗██╔══██╗██║░░░██║╚══██╔══╝  ╚══██╔══╝██║░░██║██║██╔════╝')}
 {rainbowtext.text('███████║██████╦╝██║░░██║██║░░░██║░░░██║░░░  ░░░██║░░░███████║██║╚█████╗░')}
 {rainbowtext.text('██╔══██║██╔══██╗██║░░██║██║░░░██║░░░██║░░░  ░░░██║░░░██╔══██║██║░╚═══██╗')}
 {rainbowtext.text('██║░░██║██████╦╝╚█████╔╝╚██████╔╝░░░██║░░░  ░░░██║░░░██║░░██║██║██████╔╝')}
 {rainbowtext.text('╚═╝░░╚═╝╚═════╝░░╚════╝░░╚═════╝░░░░╚═╝░░░  ░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚═════╝░')}
-
 {w}Me, {g}Vipqix{w}, have worked on this tool from soruces from {g}geek{w}, {g}static{w}.
 i did all the work. jus kidding, i had developed aids from this, brain damage, and more
 but this did take me a while to make, and i did learn a lot from this, so
 expect more tools from me, and i hope you enjoy this tool, and i hope you
 have a great day, and i hope you have a great life. - {g}Vipqix{w}
-
 who made what?
 ----------------------------------
 | auto mines - geek & static     |  
@@ -224,10 +228,40 @@ elif ainput == 8:
         print(f'{w}token: {r}invalid')
 
 elif ainput == 9:
-    autoplay.crashmonitor()
+    os.system('cls')
+    print('welcome to crash monitor!')
+    while True:
+        autoplay.crashmonitor()
 
 elif ainput == 10:
-    exit()
+    #rain 
+    os.system('cls')
+    refresh = 1
+    minimum = 501
+    while True:
+        try:
+            scraper = cloudscraper.create_scraper()
+            r = scraper.get('https://rest-bf.blox.land/chat/history').json()
+            check = r['rain']
+            if check['active'] == True:
+                if check['prize'] >= minimum:
+                    grabprize = str(check['prize'])[:-2]
+                    prize = (format(int(grabprize),","))
+                    host = check['host']
+                    getduration = check['duration']
+                    convert = (getduration/(1000*60))%60
+                    duration = (int(convert))
+                    waiting = (convert*60+10)
+                    sent = time.strftime("%d/%m/%Y %H:%M:%S", time.localtime(int(time.time())))
+                    print(f"Rain amount: {g}{prize}{w} R$\nExpiration: {g}{duration}{w} minutes\nHost: {g}{host}{w}\nTimestamp: {sent}\n\n")
+                else:
+                    time.sleep(130)
+                time.sleep(waiting)
+            elif check['active'] == False:
+                time.sleep(refresh)
+        except Exception as e:
+            print(e)
+            time.sleep(refresh)
 
 elif ainput == 11:
     os.system('start authtoken.txt')
