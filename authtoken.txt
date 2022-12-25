@@ -1,2 +1,2 @@
 paste your bloxflip auth token here
-to get it paste   localStorage.getItem('_DO_NOT_SHARE_BLOXFLIP_TOKEN')    in ur console when you are on bloxflip.com
+to get it paste,   localStorage.getItem('_DO_NOT_SHARE_BLOXFLIP_TOKEN')    in ur console when you are on bloxflip.com
