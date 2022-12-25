@@ -16,7 +16,7 @@ class autoplay:
 
     def automines():
         
-            amount = int(input('amount of games: ')); bet_amount = int(input('bet amount: ')); mine_amount = int(input('mines: ')); auth_token = token
+            amount = int(input('amount of games: ')); bet_amount = int(input('bet amount: ')); mine_amount = int(input('mines (1 - 25): ')); auth_token = token
             #bet_amount : int = betamountinput; mine_amount : int = minesamountinput; auth_token : str = token.read()
             for i in range(amount):
                 if bet_amount < 5:
@@ -75,7 +75,7 @@ class autoplay:
         repeat = int(input('amount of games: '))
         difficulty = str(input('difficulty (hard, easy): '))
         bet_amount = int(input('bet amount: '))
-        click_amount = int(input('click amount: '))
+        click_amount = int(input('click amount(1 - 8): '))
         for i in range(repeat):
             if difficulty == 'easy'  or difficulty == 'hard':
                 pass
